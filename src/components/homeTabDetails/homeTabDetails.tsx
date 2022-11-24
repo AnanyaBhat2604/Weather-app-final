@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import Switch from 'react-switch'
 import { addFavalue } from '../../redux/weatherSlice'
 
-const HomeTab = ({ date }: any) => {
+const HomeTabDetails = ({ date }: any) => {
   const [favHeart, setFavHeart] = useState(false)
   const [favH, setFavH] = useState(false)
   const Data = useSelector((state: any) => state.weatherData.value)
@@ -13,7 +13,23 @@ const HomeTab = ({ date }: any) => {
   const [checked, setChecked] = useState(false)
 
   const previousData = JSON.parse(localStorage.getItem('fav') || '[]')
-
+  const removeItem = (location: any) => {
+    console.log('abvcxz', location.location.woeid)
+    const favourites = JSON.parse(localStorage.getItem('fav') || '[]')
+    console.log('woeid', favourites)
+    let remId = -1
+    for (let i = 0; i < favourites.length; i++) {
+      console.log('id', favourites[i].location.woeid, location.location.woeid)
+      if (favourites[i].location.woeid === location.location.woeid) {
+        remId = i
+      }
+    }
+    console.log('remId', remId)
+    favourites.splice(remId, 1)
+    console.log('new remId', favourites)
+    localStorage.setItem('fav', JSON.stringify(favourites))
+    window.location.reload()
+  }
   useEffect(() => {
     for (let i = 0; i < previousData.length; i++) {
       if (
@@ -154,9 +170,7 @@ const HomeTab = ({ date }: any) => {
         ) : (
           <div
             className="addFav"
-            onClick={() => {
-              h()
-            }}
+                                       onClick={() => removeItem(Data)}
           >
             <div className="favImg">
               <img
@@ -388,4 +402,4 @@ const HomeTab = ({ date }: any) => {
   )
 }
 
-export default HomeTab
+export default HomeTabDetails

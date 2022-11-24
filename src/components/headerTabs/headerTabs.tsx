@@ -6,7 +6,7 @@ import Recent from '../recent/recent'
 import { Route, Routes, NavLink } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 
-const TabsHeader = () => {
+const HeaderTabs = () => {
   const [date, setDate] = useState<any>(new Date())
 
   const today = () => {
@@ -70,4 +70,4 @@ const TabsHeader = () => {
   )
 }
 
-export default TabsHeader
+export default HeaderTabs

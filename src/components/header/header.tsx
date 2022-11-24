@@ -24,7 +24,8 @@ const Header = () => {
     setSearch(searchItem)
   }, [])
 
-  const url = `https://yahoo-weather5.p.rapidapi.com/weather?location=${search}&format=json&u=f`
+  const defaultSearch =search||"udupi"
+  const url = `https://yahoo-weather5.p.rapidapi.com/weather?location=${defaultSearch}&format=json&u=f`
 
   const options = {
     method: 'GET',
